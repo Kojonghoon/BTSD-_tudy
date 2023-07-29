@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>조건문-2</title>
+</head>
+
+<body>
+  <script>
+    //짝수를 검사하는 프로그램
+    var value = window.prompt("숫자를 입력해주세요.");
+    // alert(typeof (value));  //String
+    //prompt()에서 받은 value값은 String 타입니다. 
+    //아래코드는 parseInt() 통해서 String 타입을 
+    // 강제로 정수타입으로 바꾸고있다.(강제형변환)
+    value = parseInt(value);
+
+    if (value % 2 == 0) {
+      alert("짝수입니다.")
+    }
+    else {
+      alert("짝수가 아닙니다.")
+    }
+
+
+  </script>
+</body>
+
+</html>
