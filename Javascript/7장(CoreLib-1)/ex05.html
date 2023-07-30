@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>파이리 왔다갔다</title>
+    <style>
+        #panel {
+            width: 600px;
+            height: 300px;
+            border: 2px solid #999;
+            position: relative;
+        }
+
+        #bar {
+            position: absolute;
+            left: 50px;
+            top: 190px;
+            width: 500px;
+            height: 20px;
+            background: #f00;
+        }
+
+        #fire {
+            width: 120px;
+            height: 50px;
+            position: absolute;
+            left: 50px;
+            top: 120px;
+        }
+
+        #nav {
+            text-align: center;
+            width: 600px;
+            margin-top: 20px;
+        }
+
+        #btnStart,
+        #btnStop {
+            font-size: 20px;
+            font-weight: bold;
+        }
+    </style>
+
+    <script src="libs/code.jquery.com_jquery-3.7.0.js"></script>
+
+    <script>
+        //전역변수를 선언과 동시에 초기화
+        var $fire = null;
+        //이동할 거리
+        var step = 50
+        var timerID = 0
+
+        $(document).ready(function () {
+            init()
+            initEvent();
+        })
+
+        //요소초기화
+        function init() {
+            //파이리 요소 찾아오기
+            $fire = $("#fire")
+        }
+
+        //이벤트 등록
+        function initEvent() {
+            //파이리가 움직이는 이벤트를 등록
+            $("#btnStart").click(function () {
+                start();
+            })
+            //파이리가 멈추는 이벤트를 등록
+            $("#btnStop").click(function () {
+                stop();
+            })
+        }
+
+        //파이리 움직이기 타이머 실행
+        function start() {
+            if (timerID == 0) {
+                timerID = setInterval(function () {
+                    //파이리 움직이기(0.05초마다 moveFire()를 호출)
+                    moveFire()
+                }, 50)
+            }
+        }
+
+        //파이리 멈추기 타이머 실행
+        function stop() {
+            // alert(timerID)
+            clearInterval(timerID)
+            timerID = 0
+        }
+
+        //파이리 움직이시
+        function moveFire() {
+            //다음 파이리의 위치
+            var x = $fire.position().left + step
+            //파이리 위치가 430을 넘는경우, 이미지 변경
+            //해주는 부분
+            if (x >= 430) {
+                //.attr() 함수는 선택자에 의해서 선택된 요소들 중에서
+                //요소의 속성값을 가지고 오는 함수이다.
+                $fire.attr("src", "images/1.png")
+                step = -50
+            }
+            //이미지 위치가 50보다 작은 경우, 파이리로 변경
+            if (x < 50) {
+                //.attr() 함수는 선택자에 의해서 선택된 요소들 중에서
+                //요소의 속성값을 가지고 오는 함수이다.
+                $fire.attr("src", "images/3.png")
+                step = 50
+            }
+            //파이리 위치 설정
+            $fire.css("left", x)
+        }
+
+    </script>
+</head>
+
+<body>
+    <div>
+        <div id="panel">
+            <div id="bar"></div>
+            <img src="images/1.png" id="fire">
+        </div>
+        <div id="nav">
+            <button id="btnStart">시작</button>
+            <button id="btnStop">멈춤</button>
+        </div>
+    </div>
+</body>
+
+</html>

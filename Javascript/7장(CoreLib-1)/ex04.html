@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>파이리 게임</title>
+    <style>
+        .container {
+            width: 600px;
+            height: 500px;
+            position: relative;
+            border: 3px solid red;
+        }
+
+        .container #fire {
+            width: 50px;
+            margin-left: 250px;
+            margin-top: 150px;
+        }
+
+        #text {
+            font-size: 30px;
+            font-weight: bold;
+        }
+
+        #score {
+            font-size: 30px;
+            font-weight: bold;
+        }
+    </style>
+    <script src="libs/code.jquery.com_jquery-3.7.0.js"></script>
+    <script>
+        //파이리 클릭하면 점수가 변하도록 만든다. 단, setTimeout()사용하여
+        //5초 후 종료한다.
+        $(document).ready(function () {
+            //점수 저장 변수
+            var cnt = 0
+            //점수 출력부분
+            var $score = $("#score")
+            //플래그 변수(어떠한 조건이 되면 코드를 실행을 시키고, 조건이 되지 
+            //않으면 코드를 실행을 시키지 않는 변수) 
+            var play = true
+
+            $("#fire").click(function () {
+                //점수증가
+                if (play) {
+                    cnt++
+                    $score.html(cnt)
+                }
+            })
+            //게임을 5초후에 종료
+            setTimeout(function () {
+                play = false
+                alert("게임이 종료 되었습니다.")
+            }, 5000)
+        })
+    </script>
+</head>
+
+<body>
+    <div id="text">
+        현재점수 : <span id="score">0</span>
+    </div>
+    <div class="container">
+        <img src="images/1.png" id="fire">
+    </div>
+</body>
+
+</html>
