@@ -4,48 +4,29 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>자바스크립트(css) vs jQuery-6</title>
-  <style>
-    body {
-      font-size: 25px;
-      font-family: "굴림";
-    }
-
-    div,
-    p,
-    ul,
-    li {
-      border: 1px solid gray;
-      margin: 10px;
-    }
-
-    ul {
-      padding: 10px;
-    }
-
-    li.select {
-      background-color: #ccc;
-    }
-
-    /* CSS로 속성의 값을 준 것 */
-    /* #header {
-      border: 5px solid #f00;
-    } */
-  </style>
+  <title>노드다루기-each(), eq(), $(this), this</title>
+  <link rel="stylesheet" href="css/ex01.css">
   <script src="../libs/code.jquery.com_jquery-3.7.0.js"></script>
   <script>
-    // 자바스크립트로 아이디가 header인 노드를 찾아서 변경하기 
-    // window.onload = function(){
-    //   var header = document.getElementById("header")
-    //   header.style.border="5px solid #f00"
-    // }
-
-    //jQuery 아이디가  header인 노드를 찾아서 border스타일 변경하기
     $(document).ready(function () {
-      $("#header").css("border", "5px solid #f00")
+      // $("ul.menu li").each(function (index) {
+      //   //this는 현재 jQuery의 객체를 의미를 한다. 여기서는 HTMLLIElement출력하고 있다.
+      //   document.write(this + "<br/>")
+      //   console.log($(this))
+      // })
+
+      //li객체들을 찾아서 배열로 리턴을 받는다.
+      var $liList = $("ul.menu li")
+      //$liList에 있는 li객체들의 border속성을 루프를 돌면서 2배수 두껍게 만드는 내용
+      $liList.each(function (index) {
+        var borderPixel = (index + 1) * 2
+        // $liList.eq(index).css("border", borderPixel + "px solid #f00")
+
+        //$(this)는 루프를 돌면서 li객체를 하나씩 가져오고 있다.
+        $(this).css("border", borderPixel + "px solid #f00")
+      })
     })
   </script>
-
 </head>
 
 <body>

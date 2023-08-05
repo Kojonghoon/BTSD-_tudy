@@ -4,21 +4,42 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>자바스크립트 vs jQuery-2</title>
+  <title>아이디, 태그이름, 클래스 이름으로 노드 찾기</title>
   <link rel="stylesheet" href="css/ex01.css">
   <script src="../libs/code.jquery.com_jquery-3.7.0.js"></script>
   <script>
-    // 자바스크립트로 태그 이름이 p인 노드를 찾아서 변경하기 
-    // window.onload = function () {
-    //   var pArr = document.getElementsByTagName("p")
-    //   for (var i = 0; i < pArr.length; i++) {
-    //     pArr[i].style.border = "5px solid #f00"
-    //   }
-    // }
-    
-    //jQuery 태그 이름이 p인 노드를 찾아서 border스타일 변경하기
+    //직접 아이디 선택자를 이용하여 노드를 찾는 방법
+    // $(document).ready(function () {
+    //   $("#footer").css("border", "5px solid red")
+    // })
+
+    //아이디 선택자를 이용하여 $()를 통하여 jQuery변수에다가
+    //할당하여 노드를 찾는 방법
+    // $(document).ready(function () {
+    //   var $footer = $("#footer")
+    //   $footer.css("border", "5px solid red")
+    // })
+
+    //태그이름으로 노드 찾기
+    // $(document).ready(function () {
+    //   var $p = $("p")
+    //   $p.css("border", "5px solid red")
+    // })
+
+    //클래스이름으로 노드 찾기
+    // $(document).ready(function () {
+    //   var $menu = $(".menu")
+    //   $menu.css("border", "5px solid red")
+    // })
+
+    //ul태크의 자식요소에 클래스 선택자를 가지고 있는 노드 찾기
     $(document).ready(function () {
-      $("p").css("border", "5px solid #f00")
+      var $select = $("ul.menu li.select")
+      var $test1 = $("ul.menu li.test1")
+      $test1.css("border", "5px solid red")
+      $select.css("border", "5px solid red")
+      // $("ul.menu li.select").css("border", "5px solid red")
+      // $("ul.menu li.test1").css("border", "5px solid red")
     })
   </script>
 

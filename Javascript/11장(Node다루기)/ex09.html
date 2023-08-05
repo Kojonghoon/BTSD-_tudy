@@ -4,48 +4,17 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>자바스크립트(css) vs jQuery-6</title>
-  <style>
-    body {
-      font-size: 25px;
-      font-family: "굴림";
-    }
-
-    div,
-    p,
-    ul,
-    li {
-      border: 1px solid gray;
-      margin: 10px;
-    }
-
-    ul {
-      padding: 10px;
-    }
-
-    li.select {
-      background-color: #ccc;
-    }
-
-    /* CSS로 속성의 값을 준 것 */
-    /* #header {
-      border: 5px solid #f00;
-    } */
-  </style>
+  <title>노드다루기-특정노드만 찾아서 인덱스값을 출력하기(index())</title>
+  <link rel="stylesheet" href="css/ex01.css">
   <script src="../libs/code.jquery.com_jquery-3.7.0.js"></script>
   <script>
-    // 자바스크립트로 아이디가 header인 노드를 찾아서 변경하기 
-    // window.onload = function(){
-    //   var header = document.getElementById("header")
-    //   header.style.border="5px solid #f00"
-    // }
-
-    //jQuery 아이디가  header인 노드를 찾아서 border스타일 변경하기
     $(document).ready(function () {
-      $("#header").css("border", "5px solid #f00")
+      $("ul.menu li").click(function () {
+        //클릭한 객체가 몇 번쨰 인덱스인지 값을 출력하는 코드이다.
+        alert($(this).index())
+      })
     })
   </script>
-
 </head>
 
 <body>
