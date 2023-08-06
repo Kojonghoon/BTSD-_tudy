@@ -4,22 +4,20 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>노드다루기-특정노드만 찾기(filter())</title>
+  <title>노드 다루기 - 특정 노드의 자식 노드 중에서 마지막 자식 노드 찾는 방법 </title>
   <link rel="stylesheet" href="css/ex01.css">
   <script src="../libs/code.jquery.com_jquery-3.7.0.js"></script>
   <script>
     $(document).ready(function () {
-      // //$liList배열값 중에서 class선택자 값이 .select인것만 찾아오는 코드
-      // //filter()는 특정노드를 찾는데 같은 레벨 요소에서만 찾을 때 사용
-      // var $liList = $("ul.menu li")
-      // $liList.filter(".select").css("background", "yellow")
+      var $menu = $("ul.menu")
+      //children("선택자")를 이용해서 마지막 지식노드에 스타일 입히기
+      // $menu.children(":last").css("border","5px solid #f00")
 
-      // //find()는 모든 자식, 자손의 특정요소를 찾는데 사용을 하도록 하자.
-      // var $content = $("#content")
-      // $content.find(".test1").css("background","red")
+      //jQuery객체의 last()호출해서 마지막 자식노드를 찾아서 스타일 입히기
+      // $menu.children().last().css("border","5px solid #f00")
 
-      //find() 전체(혹은 기준 값 하위)에서만 검색을 하지만 
-      //filter()는 자기 자신의 레벨에서 검색을 한다.
+      //eq()를 이용하는 방법
+      $menu.children().eq($menu.children().length - 1).css("border", "5px solid #f00")
     })
   </script>
 </head>
@@ -27,8 +25,8 @@
 <body>
   <div id="samplePage" class="page">
     샘플페이지(div, id=samplePage, class=page)
-    <div id="header">
-      헤더영역(div, id=header)
+    <div id="header" class="test1">
+      헤더영역(div, id=header, class=test1)
     </div>
     <div id="content" class="sample-content">
       노드찾기(div, id=content, class=sample-content)

@@ -4,22 +4,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>노드다루기-특정노드만 찾기(filter())</title>
+  <title>노드 다루기 - 자식 노드 찾기(children(), contents())</title>
   <link rel="stylesheet" href="css/ex01.css">
   <script src="../libs/code.jquery.com_jquery-3.7.0.js"></script>
   <script>
     $(document).ready(function () {
-      // //$liList배열값 중에서 class선택자 값이 .select인것만 찾아오는 코드
-      // //filter()는 특정노드를 찾는데 같은 레벨 요소에서만 찾을 때 사용
-      // var $liList = $("ul.menu li")
-      // $liList.filter(".select").css("background", "yellow")
+      //특정 노드의 모든 자식 노드를 찾고 싶을 떄는 children(), contents()를 이용한다.
+      //children() : 자식 노드 중에서 오직 태그 노드들만 찾아준다.
 
-      // //find()는 모든 자식, 자손의 특정요소를 찾는데 사용을 하도록 하자.
-      // var $content = $("#content")
-      // $content.find(".test1").css("background","red")
+      // $("#samplePage").children().css("border", "2px solid blue")
 
-      //find() 전체(혹은 기준 값 하위)에서만 검색을 하지만 
-      //filter()는 자기 자신의 레벨에서 검색을 한다.
+      //contents() : 자식 노드 중에서 태그 노드는 물론이고 텍스트 노드까지 다 찾아 준다.
+      $("#samplePage").contents().css("border", "2px solid blue")
+
+      //특정 노드의 자식노드의 길이(개수)를 구하고 있다.
+      // console.log($("#samplePage").children().length)
+
+      //특정 노드이 자식노드 + 텍스트 노드의 개수를 구하고 있다.
+      console.log($("#samplePage").contents().length)
     })
   </script>
 </head>
