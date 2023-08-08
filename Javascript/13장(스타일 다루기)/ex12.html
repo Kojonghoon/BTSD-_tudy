@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>jQuery를 활용한 이미지 랜덤으로 움직이기</title>
+  <style>
+    #panel {
+      width: 600px;
+      height: 400px;
+      border: 2px solid red;
+      position: relative;
+    }
+
+    #fire {
+      position: absolute;
+      left: 250px;
+      top: 150px;
+      width: 75px;
+      height: 75px;
+    }
+  </style>
+  <script src="../libs/code.jquery.com_jquery-3.7.0.js"></script>
+  <script>
+    window.onload = function () {
+      //파이리 노드 구하기
+      var $fire = $("#fire")
+
+      //패널의 너비와 높이를 구하기
+      var panelWidth = parseInt($("#panel").css("width"))
+      var panelHeight = parseInt($("#panel").css("height"))
+
+      //파이리가 최대로 움직일 영역을 구하가ㅣ
+      panelWidth = panelWidth - parseInt($fire.css("width"))
+      panelHeight = panelWidth - parseInt($fire.css("height"))
+
+      $("#btnStart").click(function () {
+        var left = parseInt(Math.random() * panelWidth)
+        var top = parseInt(Math.random() * panelHeight)
+
+        //파이리 위치 설정하기
+        $fire.css({
+          left: left,
+          top: top
+        })
+      })
+    }
+  </script>
+</head>
+
+<body>
+  <button id="btnStart">이미지 움직이기</button>
+  <div id="panel">
+    <img src="../image/1.png" id="fire">
+  </div>
+</body>
+
+</html>
