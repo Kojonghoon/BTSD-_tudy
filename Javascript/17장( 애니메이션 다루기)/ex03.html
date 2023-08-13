@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>페이드 인 / 아웃</title>
+  <style>
+    * {
+      font-size: 25px;
+    }
+
+    #target {
+      border: 1px solid black;
+      width: 600px;
+      height: 300px;
+      text-align: center;
+    }
+
+    #fire {
+      width: 600px;
+      height: 300px;
+    }
+  </style>
+  <script src="../libs/code.jquery.com_jquery-3.7.0.js"></script>
+
+  <!-- 이징 함수를 사용하기 위해서 라이브 러리를 가져옴 -->
+  <script src="../libs/jquery.easing.1.3.js"></script>
+
+  <script>
+    $(document).ready(function () {
+      //움직일 대상 찾아오기
+      var $img1 = $("#target")
+
+      //나타나는 효과(크기는 변하지 않고 투명도만 변한다)
+      $("#show").on("click", function (e) {
+        $img1.fadeIn(1000, "easeInQuint", function () {
+          alert("fadeIn 완료")
+        })
+      })
+
+      //사라지는 효과(크기는 변하지 않고 투명도만 변한다)
+      $("#hide").on("click", function (e) {
+        $img1.fadeOut(1000, "easeOutQuint", function () {
+          alert("fadeOut 완료")
+        })
+      })
+    })
+  </script>
+</head>
+
+<body>
+  <div id="target">
+    <img id="fire" src="../image/1.png">
+  </div>
+  <div>
+    <button id="show">fadeIn</button>
+    <button id="hide">fadeOut</button>
+  </div>
+</body>
+
+</html>
