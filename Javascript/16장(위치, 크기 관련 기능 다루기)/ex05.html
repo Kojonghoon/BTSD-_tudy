@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>전역위치 구하기(offset() 활용)</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-size: 20px;
+    }
+
+    #info {
+      border: 2px solid black;
+    }
+
+    #parent1 {
+      position: absolute;
+      border: 1px solid black;
+      width: 500px;
+      height: 400px;
+      left: 100px;
+      top: 100px;
+
+    }
+
+    .fire {
+      position: absolute;
+      width: 50px;
+    }
+
+    .fire p {
+      position: absolute;
+      margin-top: 20px;
+      text-align: center;
+      width: 100%;
+    }
+
+    #fire1 {
+      left: 50px;
+      top: 100px;
+    }
+
+    #fire2 {
+      left: 150px;
+      top: 200px;
+    }
+
+    #fire3 {
+      left: 180px;
+      top: 50px;
+    }
+
+    #fire4 {
+      left: 350px;
+      top: 200px;
+    }
+
+    #fire5 {
+      left: 50px;
+      top: 300px;
+    }
+  </style>
+  <script src="../libs/code.jquery.com_jquery-3.7.0.js"></script>
+  <script>
+    $(document).ready(function () {
+      var $info = $("#info")
+      var $selectedFire = null
+      //파이리에 이벤트 등록
+      $(".fire").click(function (e) {
+        //클릭한 파이리
+        $selectedFire = $(this)
+        var strID = $selectedFire.attr("id")
+
+        //지역 좌표 위치 값 구하기
+        var localPos = $selectedFire.position()
+        var str = "id: " + strID + ", 지역좌표 Left : " + localPos.left +
+                  ", top :" + localPos.top + "<br/>"
+
+        //전역 좌표 위치 값 구하기
+        var globalPos = $selectedFire.offset()
+        str += "id: " + strID + ", 지역좌표 Left : " + globalPos.left +
+                  ", top :" + globalPos.top + "<br/>"
+                  
+        $info.html(str)
+      })
+    })
+  </script>
+</head>
+
+<body>
+  <div id="info"> 전역 위치 값 출력</div>
+  <div id="parent1">
+    <div id="fire1" class="fire">
+      <p>1</p>
+      <img src="../image/1.png" style="width: 100px;">
+    </div>
+    <div id="fire2" class="fire">
+      <p>2</p>
+      <img src="../image/1.png" style="width: 100px;">
+    </div>
+    <div id="fire3" class="fire">
+      <p>3</p>
+      <img src="../image/1.png" style="width: 100px;">
+    </div>
+    <div id="fire4" class="fire">
+      <p>4</p>
+      <img src="../image/1.png " style="width: 100px;">
+    </div>
+    <div id="fire5" class="fire">
+      <p>5</p>
+      <img src="../image/1.png" style="width: 100px;">
+    </div>
+  </div>
+</body>
+
+</html>
