@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>함수 방식으로 클래스 만들기</title>
+  <script src="../libs/code.jquery.com_jquery-3.7.0.js"></script>
+  <script>
+    //클래스를 설게하는 부분 (붕어빵 틀을 만드는 과정) - 멤머가 4개이다.
+    //프로퍼티(속성)은 : 3개, 멤버메서드(함수): 1개
+    function Person() {
+      this.name = "고종훈";
+      this.age = "29"
+      this.address = "인천시";
+      this.displayPerson = function () {
+        document.write("name: " + this.name +
+          ", age: " + this.age + ", address: " + this.address + "<br/>")
+      }
+    }
+
+    //인스턴스를 생성(붕어빵을 만든다.), person이라는 인스턴스 변수(리모콘)을 통해서
+    //얼마든지 멤버들에게 접근해서 변경이 가능하다.
+    //new라는 연산자가 메모리에 멤버의 크기만큼 할당하는 것이다.
+    var person1 = new Person()
+    //프로퍼티의 값을 변경
+    person1.age = 20
+    //person의 멤버메서드 호출
+    person1.displayPerson()
+
+    //아래와 같이 인스턴스를 하나를 더 만들었다. 하지만 모든 인스턴스의 저장공간은
+    //서로 독립적이다.
+    var person2 = new Person()
+    person2.displayPerson()
+  </script>
+</head>
+
+<body>
+</body>
+
+</html>
