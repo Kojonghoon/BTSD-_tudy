@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>인스턴스 호출</title>
+  <script src="../libs/code.jquery.com_jquery-3.7.0.js"></script>
+  <script>
+    var userName = "홍길돌"
+
+    //클래스 정의
+    function User(name) {
+      this.userName = name
+    }
+    //인스턴스를 생성
+    //new연산자가 들어가면 무조건 인스턴스를 만들고 메모리에 인스턴스를 할당 받는다.
+    //(전역변수하고는 완전 별개)
+    var user = new User("김연아")
+    console.log("userName = " + user.userName)
+  </script>
+</head>
+
+<body>
+</body>
+
+</html>
