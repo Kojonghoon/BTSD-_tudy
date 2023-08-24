@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>추상화 예제2</title>
+	<script src="../libs/code.jquery.com_jquery-3.7.0.js"></script>
+	<script>
+		$(document).ready(function () {
+			//매개변수를 4개 주면서 생성자를 호출
+			var tv = new TV("스마트TV", "FHD", 10, 20)
+			//프로퍼티 값을 출력하기
+			tv.showInfo()
+			//채널 변경
+			tv.soundChange(50)
+			//볼륨 변경
+			tv.channelChange(100)
+		})
+		//추상화
+		//생성자를 정의 및 프로퍼티 초기화
+		function TV(model, resolution, channel, volume) {
+			//사람에게는 공통적으로 프로퍼티가 이름, 성별, 취미가 다 있다.
+			this.model = model
+			this.resolution = resolution
+			this.channel = channel
+			this.volume = volume
+		}
+		//공통적인 부분을 메서드로 정의
+		//전원 On()정의
+		TV.prototype.On = function () {		   //선언부
+			document.write("TV가 켜졌습니다.." + "<br/>")		//구현부
+		}
+		//전원 Off()정의
+		TV.prototype.Off = function () {
+			document.write("TV가 꺼졌습니다." + "<br/>")
+		}
+		//채널 변경 부분을 정의함
+		TV.prototype.channelChange = function (channel) {
+			this.channel = channel
+			document.write("현재 채널은 " + this.channel + "입니다." + "<br/>")
+		}
+		//사운드 조절 부분을 정의함
+		TV.prototype.soundChange = function (volume) {
+			this.volume = volume
+			document.write("현재 볼륨 " + this.volume + "입니다." + "<br/>")
+		}
+		//프로퍼티 출력하기
+		TV.prototype.showInfo = function () {
+			document.write("모델 : " + this.model + "<br/>")
+			document.write("해상도 : " + this.resolution + "<br/>")
+			document.write("현재채널 : " + this.channel + "<br/>")
+			document.write("현재볼륨 : " + this.volume + "<br/>")
+		}
+
+	</script>
+</head>
+
+<body>
+</body>
+
+</html>
