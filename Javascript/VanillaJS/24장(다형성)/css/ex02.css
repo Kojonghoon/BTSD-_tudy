@@ -1,0 +1,36 @@
+div.image-container {
+	position: relative;
+}
+
+div.image-container img {
+	position: absolute;
+	left: 0;
+	top: 0;
+	width: 120px;
+}
+
+#container1 {
+	background-color: aqua;
+}
+
+#btnHorizontal:hover {
+	background-color: red;
+}
+
+#btnVertical:hover {
+	background-color: yellow;
+}
+
+#btnRandom:hover {
+	background-color: blue;
+}
+
+#btnGrid:hover {
+	background-color: green;
+}
+
+div button {
+	font-size: 15px;
+	font-weight: 700;
+	margin-bottom: 10px;
+}
