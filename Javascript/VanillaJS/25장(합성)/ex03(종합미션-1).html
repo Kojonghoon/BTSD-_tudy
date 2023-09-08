@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>종합미션-클래스 단위 코딩</title>
+	<style>
+		.rolling-banner {
+			position: relative;
+			top: 100px;
+			left: 100;
+			width: 400px;
+			height: 200px;
+			border: 2px solid blue;
+			overflow: hidden;
+		}
+
+		.rolling-banner img {
+			position: absolute;
+			left: 0;
+			top: 0;
+			/* 
+			opacity: 0.5;
+			테스트를 위한 투명도 설정 
+			*/
+		}
+
+		#banner1 {
+			top: 250px;
+			left: 250px;
+		}
+	</style>
+	<script src="../libs/code.jquery.com_jquery-3.7.0.js"></script>
+	<script>
+		//롤링 배너 : 클래스 단위 코딩 방법을 이용함.
+		$(document).ready(function () {
+			//인스턴스 생성
+			var rolling1 = new RollingBanner();
+		})
+		//클래스 정의
+		function RollingBanner() {
+			//프로퍼티 생성 및 초기화
+			//클래스 내부에서만 사용할 것이니 프로퍼티를 private제어자의 의미로
+			//_(언더바)를 붙여주도록 하자.
+			this._$banners = null
+			this._currentIndex = 0
+			this._timerId = -1
+
+			this._init();
+			this._initBannerPos();
+
+			//롤링 배너 자동 실행 메서드 호출
+			this._startAutoPlay()
+		}
+
+		//요소 초기화 메서드 정의
+		RollingBanner.prototype._init = function () {
+			//배너 이미지를 배열로 저장하고 있다.
+			this._$banners = $("#banner1 img")
+		}
+
+		//배너 위치 초기화
+		RollingBanner.prototype._initBannerPos = function () {
+			//배너 위치를 화면에서 보이지 않게 숨기기
+			this._$banners.css("top", 200)
+			//0번쨰 배너 이미지 활성화
+			this._$banners.eq(this._currentIndex).css("top", 0)
+		}
+
+		//롤링 배너 자동 시작 메서드 정의
+		RollingBanner.prototype._startAutoPlay = function () {
+			var objThis = this;
+
+			//타이머가 두 번 이상 실행되지 않게 처리하는 코드
+			if (this._timerId == -1) {
+				this._timerId = setInterval(function () {
+					//다음 배너를 활성화 시켜주는 nextBanner()메서드 호출
+					objThis.nextBanner()
+				}, 1500)
+			}
+		}
+
+		//다음 배너 활성화 해주는 메서드 정의
+		RollingBanner.prototype.nextBanner = function () {
+			//현재 인덱스 값 구하기
+			var outIndex = this._currentIndex
+			//다음 배너 인덱스 값 구하기
+			this._currentIndex++;
+			//마지막 배너까지 롤링한 경우 다시 0번째 부터 
+			//롤링될 수 있게 인덱스 값을 0으로 설정하는 코드
+			if (this._currentIndex >= this._$banners.length) {
+				this._currentIndex = 0
+			}
+
+			//현재 배너 구하기
+			var $outBanner = this._$banners.eq(outIndex)
+			//다음 배너 구하기
+			var $inBanner = this._$banners.eq(this._currentIndex)
+
+			//롤링 준비 - 다음 배너 위치 초기화
+			$inBanner.css({
+				top: 200,
+				opacity: 0
+			})
+
+			//현재 배너를 사라지게 하기
+			$outBanner.stop().animate({
+				top: -200,
+				opacity: 0
+			}, 600)
+			
+			//다음 배너 나타나게 하기
+			$inBanner.stop().animate({
+				top: 0,
+				opacity: 1
+			}, 600)
+		}
+	</script>
+</head>
+
+<body>
+	<div class="rolling-banner" id="banner1">
+		<img src="../image/1.png">
+		<img src="../image/2.png">
+		<img src="../image/3.png">
+		<img src="../image/4.png">
+		<img src="../image/5.png">
+		<img src="../image/6.png">
+	</div>
+</body>
+
+</html>

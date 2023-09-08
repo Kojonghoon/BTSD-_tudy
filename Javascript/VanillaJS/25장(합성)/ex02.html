@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>합성 예제-1(합성을 사용한 풀이)</title>
+	<style>
+		div.image_container {
+			position: relative;
+			border: 2px solid red;
+			height: 300px;
+		}
+
+		div.image_container img {
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: 120px;
+		}
+
+		#container {
+			background-color: aqua;
+		}
+	</style>
+	<script src="../libs/code.jquery.com_jquery-3.7.0.js"></script>
+	<script>
+		$(document).ready(function () {
+			//인스턴스 생성
+			var gallery = new SimpleGallery("#container img")
+			alert("이미지가 가로로 정렬됩니다.")
+			//가로로 정렬하는 메서드 호출
+			gallery.align()
+		})
+
+		//심플갤러리 클래스 정의
+		//HAlignable클래스애서 구현되어진 기능(가로정렬)을 사용하는 클래스
+		function SimpleGallery(selector) {
+			this.$images = $(selector)
+		}
+		//메서드 정의
+		//이미지를 가로로 정렬하는 메서드
+		//합성을 이용한(구현되어 있는 HAlignable.align()메서드 구현부에서 호출함)
+		//합성이란 자기자신이 필요한 기능이 있다면, 직접 구현하지 않고 다른 클래스에서
+		//구현된 기능이 있다면 그것을 연결해서 사용하는 기능이 바로 합성이다.
+		SimpleGallery.prototype.align = function () {
+			//가로정렬 기능이 구현되어져 있는 HAlignable클래스의 align()를 빌려서
+			//작동하도록 호출 하였다.
+			HAlignable.align(this.$images)
+		}
+		//가로 정렬 기능을 구현한 리터럴 클래스(인스텉스가 바로 생성되며 1개밖에 생성을 하지 못한다.)
+		//HAlignable클래스는 기능을 구현한 제공하는 클래스
+		var HAlignable = {
+			//정렬메서드 만들기
+			align: function ($images) {
+				//이미지 개수 구하기
+				var length = $images.length;
+				//가로 정렬하는 이미지 나열하기
+				for (var i = 0; i < length; i++) {
+					//x좌표 구하기
+					var x = i * 150
+					// 위치 설정하기
+					$images.eq(i).css({
+						//좌표값 설정하기
+						left: x,
+						top: 0
+					})
+				}
+			}
+		}
+	</script>
+</head>
+
+<body>
+	<div class="image_container" id="container">
+		<img src="../image/1.png">
+		<img src="../image/2.png">
+		<img src="../image/3.png">
+		<img src="../image/4.png">
+		<img src="../image/5.png">
+		<img src="../image/6.png">
+	</div>
+</body>
+
+</html>

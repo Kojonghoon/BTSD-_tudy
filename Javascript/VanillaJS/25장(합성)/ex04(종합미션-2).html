@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>종합미션-여러 개의 롤링배너 만들기</title>
+	<style>
+		.rolling-banner {
+			position: absolute;
+			border: 2px solid blue;
+			overflow: hidden;
+		}
+
+		.rolling-banner img {
+			position: absolute;
+			left: 0;
+			top: 0;
+			width: 100%;
+			height: 100%;
+			/* 
+			opacity: 0.5;
+			테스트를 위한 투명도 설정 
+			*/
+		}
+
+		#banner1 {
+			top: 250px;
+			left: 50px;
+			width: 400px;
+			height: 200px;
+		}
+
+		#banner2 {
+			top: 250px;
+			left: 500px;
+			width: 200px;
+			height: 100px;
+		}
+	</style>
+	<script src="../libs/code.jquery.com_jquery-3.7.0.js"></script>
+	<script>
+		//롤링 배너 : 클래스 코드를 재사용하면서 2개의 롤링 배너 만드는 코드 작성
+		$(document).ready(function () {
+			//인스턴스 생성
+			var rolling1 = new RollingBanner("#banner1", 500, 500);
+			var rolling2 = new RollingBanner("#banner2", 300, 300);
+		})
+		//클래스 정의
+		function RollingBanner(selector, playSpeed, rollingSpeed) {
+			//프로퍼티 생성 및 초기화
+			//클래스 내부에서만 사용할 것이니 프로퍼티를 private제어자의 의미로
+			//_(언더바)를 붙여주도록 하자.
+			this._$banners = null
+			this._currentIndex = 0
+			this._timerId = -1
+			//배너 높이를 저장하는 프로퍼티 초기화
+			this._bannerHeight = 0;
+
+			//속도 관련 프로퍼티 초기화
+			this._playSpeed = playSpeed
+			this._rollingSpeed = rollingSpeed
+
+
+			this._init(selector);
+			// this._initBannerPos();
+
+			//롤링 배너 자동 실행 메서드 호출
+			// this.startAutoPlay()
+
+			this._initEvent()
+		}
+
+		//초기화 및 롤링배너 시작을 하는 메서드 정의
+		RollingBanner.prototype._start = function () {
+			this._initBannerPos()
+			this.startAutoPlay()
+		}
+
+		//요소 초기화 메서드 정의
+		RollingBanner.prototype._init = function (selector) {
+			//children()는 특정한 요소의 자식요소를 선택하는 메서드이다.
+			this._$banners = $(selector).children("img")
+			//해당하는 인스턴스의 배너들의 0번째 인덱스에 있는 높이를 구하는 코드
+			//this._bannerHeight = this._$banners.eq(0).height()
+		}
+
+		RollingBanner.prototype._initEvent = function () {
+			var objThis = this;
+			// this._$banners.eq(0).one("load", function () {
+			this._$banners.on("load", function () {
+				//인스턴스가 독립적이고 각각의 높이가 다르므로 아래와 같이 높이를 구하고 있다.
+				objThis._bannerHeight = $(this).height();
+				objThis._start();
+			})
+		}
+
+		//배너 위치 초기화
+		RollingBanner.prototype._initBannerPos = function () {
+			//배너 위치를 화면에서 보이지 않게 숨기기
+			this._$banners.css("top", this._bannerHeight)
+			//0번쨰 배너 이미지 활성화
+			this._$banners.eq(this._currentIndex).css("top", 0)
+		}
+
+		//롤링 배너 자동 시작 메서드 정의
+		RollingBanner.prototype.startAutoPlay = function () {
+			var objThis = this;
+
+			//타이머가 두 번 이상 실행되지 않게 처리하는 코드
+			if (this._timerId == -1) {
+				this._timerId = setInterval(function () {
+					//다음 배너를 활성화 시켜주는 nextBanner()메서드 호출
+					objThis.nextBanner()
+				}, this._playSpeed)
+			}
+		}
+
+		//다음 배너 활성화 해주는 메서드 정의
+		RollingBanner.prototype.nextBanner = function () {
+			//현재 인덱스 값 구하기
+			var outIndex = this._currentIndex
+			//다음 배너 인덱스 값 구하기
+			this._currentIndex++;
+			//마지막 배너까지 롤링한 경우 다시 0번째 부터 
+			//롤링될 수 있게 인덱스 값을 0으로 설정하는 코드
+			if (this._currentIndex >= this._$banners.length) {
+				this._currentIndex = 0
+			}
+
+			//현재 배너 구하기
+			var $outBanner = this._$banners.eq(outIndex)
+			//다음 배너 구하기
+			var $inBanner = this._$banners.eq(this._currentIndex)
+
+			//롤링 준비 - 다음 배너 위치 초기화
+			$inBanner.css({
+				top: this._bannerHeight,
+				opacity: 0
+			})
+
+			//현재 배너를 사라지게 하기
+			$outBanner.stop().animate({
+				top: -this._bannerHeight,
+				opacity: 0
+			}, this._rollingSpeed)
+
+			//다음 배너 나타나게 하기
+			$inBanner.stop().animate({
+				top: 0,
+				opacity: 1
+			}, this._rollingSpeed)
+		}
+	</script>
+</head>
+
+<body>
+	<div class="rolling-banner" id="banner1">
+		<img src="../image/1.png">
+		<img src="../image/2.png">
+		<img src="../image/3.png">
+		<img src="../image/4.png">
+		<img src="../image/5.png">
+		<img src="../image/6.png">
+	</div>
+	<div class="rolling-banner" id="banner2">
+		<img src="../image/2.png">
+		<img src="../image/3.png">
+		<img src="../image/4.png">
+		<img src="../image/5.png">
+		<img src="../image/6.png">
+		<img src="../image/1.png">
+	</div>
+</body>
+
+</html>
