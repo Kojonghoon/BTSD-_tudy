@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<meta charset="UTF-8">
+	<title>AJAX Exam005</title>
+	<style>
+		table{
+			border: 1px solid;
+		}
+		table tr th{
+			padding: 5px;
+			background-color: #000;
+			color: #FFF;
+		}
+		table tr td{
+			padding:5px;
+			border-bottom: 1px solid green;
+		}
+	</style>
+	<script src="./ajax_exam_005.js"></script>
+</head>
+
+<body>
+	<h2>외국인이 가장 좋아하는 한국 관광 명소</h2>
+	<button type="button" onclick="loadTouristAttractions()">관광명소 데이터 불러오기</button>
+	<table id="tourlist" width="100%"">
+		<tr>
+			<th>관광명소</th>
+			<th>이미지</th>
+			<th>설명</th>
+		</tr>
+	</table>
+	<div id="main"></div>
+</body>
+
+</html>

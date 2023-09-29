@@ -1,0 +1,7 @@
+[
+	{"id":"0", "ta_title":"불국사", "ta_description":"불국사는 한국인이 가장 좋아하는 명소이자..."},
+	{"id":"1", "ta_title":"울릉도", "ta_description":"울릉도는 한국인이 가장 좋아하는 명소이자..."},
+	{"id":"2", "ta_title":"제주도", "ta_description":"제주도는 한국인이 가장 좋아하는 명소이자..."},
+	{"id":"3", "ta_title":"철원군", "ta_description":"철원군은 한국인이 가장 좋아하는 명소이자..."},
+	{"id":"4", "ta_title":"와수리", "ta_description":"와수리는 한국인이 가장 좋아하는 명소이자..."}
+]
